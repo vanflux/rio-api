@@ -2,6 +2,7 @@ const request = require("request");
 const Api = require('./api/api');
 const Character = require("./character");
 const SeedRandom = require('seedrandom');
+const ServerList = require("./serverList");
 
 const gameName = 'RioV4';
 const engine = 'UE4';
@@ -35,6 +36,8 @@ module.exports = class Client {
         'User-Agent': randomUserAgent,
       },
     }, this.opts.apiOpts));
+
+    this.serverList = new ServerList();
   }
 
   // Need steam id
@@ -67,10 +70,10 @@ module.exports = class Client {
   }
 
   // No auth needed
-  async getServerList() {
+  async loadServerList() {
     let response = await this.api.getServerList();
     if (response.hasError) return response;
-    this.serverList = response.data.server_list ? response.data.server_list : [];
+    this.serverList.updateData(response.data.server_list ? response.data.server_list : []);
     return { hasError: false, data: this.serverList };
   }
 

@@ -5,28 +5,30 @@ module.exports = async function serverInfos() {
 
   let client = new Client();
 
-  response = await client.getServerList();
-  if (response.hasError) return console.error('Error on getServerList', response.data);
+  response = await client.loadServerList();
+  if (response.hasError) return console.error('Error on loadServerList', response.data);
 
-  let bestServer = getBestServer(client);
+  let count = 5;
+  let bestServers = getBestServers(client.serverList, count);
 
   console.log('-------------------');
 
-  console.log('Players in game: ' + playersCount(client));
-  console.log('Best server: ' + bestServer.id + ' (' + bestServer.current_player_count + '/' + bestServer.max_player_count + ')');
+  console.log('Players in game: ' + playersCount(client.serverList));
+  console.log('Best servers (' + bestServers.length + '):');
+  console.log(bestServers.map(server => '- ' + server.id + ' (' + server.currentPlayerCount + '/' + server.maxPlayerCount + ')').join('\n'));
 
   console.log('-------------------');
 }
 
-function playersCount(client) {
-  return client.serverList.reduce((a, b) => a + b.current_player_count, 0);
+function playersCount(serverList) {
+  return serverList.servers.reduce((a, b) => a + b.currentPlayerCount, 0);
 }
 
-function getBestServer(client) {
-  let filteredServers = client.serverList
-    .filter(server => server.current_player_count < server.max_player_count)
-    .sort((a,b) => b.current_player_count - a.current_player_count);
-  if (filteredServers.length === 0) return null;
-  let server = filteredServers[0];
-  return server;
+function getBestServers(serverList, count=1) {
+  let filteredServers = serverList.servers
+    .filter(server => server.currentPlayerCount < server.maxPlayerCount)
+    .sort((a,b) => b.currentPlayerCount - a.currentPlayerCount);
+  
+  if (filteredServers.length > count) filteredServers.length = count;
+  return filteredServers;
 }
