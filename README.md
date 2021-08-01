@@ -1,4 +1,4 @@
-# RIO API
+# RIO API (unofficial)
 
 Chamadas da API do Raised in Oblivion implementadas usando node.js.
 
