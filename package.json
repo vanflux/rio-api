@@ -1,7 +1,7 @@
 {
-  "name": "rio-bot",
+  "name": "rio-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Raised in Oblivion API",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app",
@@ -12,5 +12,8 @@
   "dependencies": {
     "request": "^2.88.2",
     "seedrandom": "^3.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
