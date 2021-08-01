@@ -4,15 +4,75 @@ Chamadas da API do Raised in Oblivion implementadas usando node.js.
 
 ---
 
-Screenshot do exemplo de server list monitor:
+Screenshot do exemplo de monitor de server list:
 
 ![](screenshot.png)
 
 ---
 
-## Instalando usando npm:
+## Instalando usando *npm*:
 
 - ``npm install https://github.com/vanflux/rio-api.git``
+
+Import de dependência:
+```javascript
+let { Client } = require('rio-api');
+```
+
+---
+
+### **Exemplos**:
+
+#### User infos:
+
+```javascript
+let client = new Client('STEAM_ID_64_HERE');
+
+let response = await client.loadData();
+if (response.hasError) console.error(response.data);
+console.log(client.userData);
+```
+
+#### Server list:
+
+```javascript
+let client = new Client();
+
+let response = await client.loadServerList();
+if (response.hasError) console.error(response.data);
+console.log(client.serverList.servers);
+```
+
+#### Monitor de server list:
+
+```javascript
+let client = new Client();
+
+let formatServer = server => (
+    server.id + 
+    ' (' + server.currentPlayerCount + '/' + server.maxPlayerCount + ')\t' + 
+    server.address + 
+    '\tplayerHistory: [' + server.playersHistory.map(x => x.value).join(',') + ']'
+  );
+  
+client.serverList.on('new server',    server => {
+  console.log('[New Server]    ' + formatServer(server));
+});
+client.serverList.on('update server', server => {
+  console.log('[Update Server] ' + formatServer(server));
+});
+client.serverList.on('remove server', server => {
+  console.log('[Remove Server] ' + formatServer(server));
+});
+
+let response = await client.loadServerList();
+if (response.hasError) console.error(response.data);
+setInterval(async () => {
+  console.log('Updating...');
+  let response = await client.loadServerList();
+  if (response.hasError) console.error(response.data);
+}, 5000);
+```
 
 ---
 
@@ -33,29 +93,7 @@ Screenshot do exemplo de server list monitor:
 
 ---
 
-## Exemplos com trecho de código:
-
-### Lista de servidores online:
-
-```
-let client = new Client();
-let response = await client.loadServerList();
-if (response.hasError) return console.error(response.data);
-console.log(client.serverList.servers);
-```
-
-### Informações de um usuário:
-
-```
-let client = new Client('STEAM ID 64 AQUI');
-let response = await client.loadData();
-if (response.hasError) return console.error(response.data);
-console.log(client.userData);
-```
-
----
-
-## Clonando repositório e rodando:
+## Clonando repositório:
 
 ### Requisitos
 - Node.js ([https://nodejs.org/](https://nodejs.org/))
