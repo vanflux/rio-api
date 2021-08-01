@@ -10,6 +10,12 @@ Screenshot do exemplo de server list monitor:
 
 ---
 
+## Instalando usando npm:
+
+- ``npm install https://github.com/vanflux/rio-api.git``
+
+---
+
 ## Chamadas implementadas:
   - 🟢 Server List (lista de servidores)
   - 🟡 Get Player Status (status do player como kills e deaths)
@@ -24,28 +30,6 @@ Screenshot do exemplo de server list monitor:
 #### Para conseguir informações de player é necessário ter o steamId64 do mesmo.
 
 É possível obter o steamId64 a partir do nickname usando o site [https://www.steamidfinder.com](https://www.steamidfinder.com)
-
----
-
-## Como instalar:
-
-### Requisitos
-- Node.js ([https://nodejs.org/](https://nodejs.org/))
-
-### Clone o repositório
-- ``git clone https://github.com/vanflux/rio-api.git``
-
-### Vá até a pasta
-
-- ``cd rio-api``
-
-### Instale as dependências
-
-- ``npm install``
-
-### Rode (A aplicação já vem com 3 exemplos default, des-comente o que você quiser ver)
-
-- ``npm run start`` ou ``npm run dev``
 
 ---
 
@@ -68,3 +52,25 @@ let response = await client.loadData();
 if (response.hasError) return console.error(response.data);
 console.log(client.userData);
 ```
+
+---
+
+## Clonando repositório e rodando:
+
+### Requisitos
+- Node.js ([https://nodejs.org/](https://nodejs.org/))
+
+### Clone o repositório
+- ``git clone https://github.com/vanflux/rio-api.git``
+
+### Vá até a pasta
+
+- ``cd rio-api``
+
+### Instale as dependências
+
+- ``npm install``
+
+### Rode (A aplicação já vem com 3 exemplos default, des-comente o que você quiser ver)
+
+- ``npm run start`` ou ``npm run dev``
