@@ -17,6 +17,19 @@ module.exports = class Server {
     return this._currentPlayerCount;
   }
 
+  getData() {
+    return {
+      id: this.id,
+      address: this.address,
+      currentPlayerCount: this.currentPlayerCount,
+      levelRequirement: this.levelRequirement,
+      mapName: this.mapName,
+      maxPlayerCount: this.maxPlayerCount,
+      region: this.region,
+      version: this.version,
+    };
+  }
+
   updateData(data) {
     let changed = false;
     if (this.address            != data.address             ) this.address            = data.address,               changed = true;
