@@ -1,5 +1,5 @@
 const request = require("request");
-const Api = require('./api/api');
+const Api = require('./api');
 const Character = require("./character");
 const SeedRandom = require('seedrandom');
 const ServerList = require("./serverList");

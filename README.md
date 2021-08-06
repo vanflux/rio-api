@@ -21,6 +21,30 @@ let { Client } = require('rio-api');
 
 ---
 
+### Opções do Client:
+
+```javascript
+{
+  apiOpts: {
+    apiUrl: "",
+    version: "",
+    requestOpts: {
+      /*
+        Agents, headers customizados
+        Opções para a library de request
+      */
+    },
+  },
+  request: RequestLibrary, /*
+    Library de request customizada,
+    precisa ter os métodos http como funções...
+    (.get(options), .post(options) ...)
+  */
+}
+```
+
+---
+
 ### **Exemplos**:
 
 #### User infos:
