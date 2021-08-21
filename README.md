@@ -17,6 +17,8 @@ Screenshot do exemplo de monitor de server list:
 Import de dependência:
 ```javascript
 let { Client } = require('rio-api');
+
+new Client('STEAM_ID_64_HERE', options)
 ```
 
 ---
@@ -26,8 +28,8 @@ let { Client } = require('rio-api');
 ```javascript
 {
   apiOpts: {
-    apiUrl: "",
-    version: "",
+    apiUrl: null,
+    version: "b0.9.5.0",
     requestOpts: {
       /*
         Agents, headers customizados
